@@ -4,7 +4,8 @@ layout: layouts/base.njk
 {# Only include the syntax highlighter CSS on blog posts, included with the CSS per-page bundle #}
 <style>{% include "node_modules/prismjs/themes/prism-okaidia.css" %}</style>
 <style>{% include "css/prism-diff.css" %}</style>
-<h1>{{ title }}</h1>
+
+<div class = "post-container">
 
 <ul class="post-metadata">
 	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
@@ -14,7 +15,14 @@ layout: layouts/base.njk
 	{%- endfor %}
 </ul>
 
+
+<div class = "post-text">
+<div class = "writing">
+<h1>{{ title }}</h1>
 {{ content | safe }}
+</div>
+</div>
+</div>
 
 {%- if collections.posts %}
 {%- set previousPost = collections.posts | getPreviousCollectionItem %}

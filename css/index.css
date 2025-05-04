@@ -1,40 +1,40 @@
 /* Defaults */
 :root {
 	--font-family: -apple-system, system-ui, sans-serif;
-	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
+		Courier, monospace;
 }
 
 /* Theme colors */
 :root {
-	--color-gray-20: #e0e0e0;
-	--color-gray-50: #C0C0C0;
-	--color-gray-90: #333;
+	--color-coral: #d95e47; /* основний корал */
+	--color-olive: #5a5d4f; /* темна оливка */
+	--color-neon: #b9f73a; /* неоново-салатовий */
+	--color-sand: rgb(244, 249, 236); /* молочний фон */
+	--color-dark: #2a2a2a; /* текст на світлому */
 
-	--background-color: #fff;
+	--background-color: var(--color-sand);
+	--text-color: var(--color-dark);
 
-	--text-color: var(--color-gray-90);
-	--text-color-link: #082840;
-	--text-color-link-active: #5f2b48;
-	--text-color-link-visited: #17050F;
+	--text-color-link: var(--color-coral);
+	--text-color-link-active: var(--color-olive);
+	--text-color-link-visited: var(--color-neon);
 
 	--syntax-tab-size: 2;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
 	:root {
-		--color-gray-20: #e0e0e0;
-		--color-gray-50: #C0C0C0;
-		--color-gray-90: #dad8d8;
+		--background-color: var(--color-sand);
+		--text-color: var(--color-dark);
 
-		/* --text-color is assigned to --color-gray-_ above */
-		--text-color-link: #1493fb;
-		--text-color-link-active: #6969f7;
-		--text-color-link-visited: #a6a6f8;
-
-		--background-color: #15202b;
+		--text-color-link: var(--color-neon); /* посилання в активному світлому */
+		--text-color-link-active: var(--color-coral); /* наведене */
+		--text-color-link-visited: var(--color-olive); /* відвідане */
 	}
 }
-
 
 /* Global stylesheet */
 * {
@@ -56,9 +56,9 @@ body {
 html {
 	overflow-y: scroll;
 }
-body {
+/* body {
 	max-width: 40em;
-}
+} */
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
@@ -72,16 +72,16 @@ body {
 }
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
-img{
-  max-width: 100%;
+img {
+	max-width: 100%;
 }
 img[width][height] {
-  height: auto;
+	height: auto;
 }
 img[src$=".svg"] {
-  width: 100%;
-  height: auto;
-  max-width: none;
+	width: 100%;
+	height: auto;
+	max-width: none;
 }
 video,
 iframe {
@@ -129,7 +129,7 @@ header {
 .links-nextprev {
 	display: flex;
 	justify-content: space-between;
-	gap: .5em 1em;
+	gap: 0.5em 1em;
 	list-style: "";
 	border-top: 1px dashed var(--color-gray-20);
 	padding: 1em 0;
@@ -154,7 +154,7 @@ code {
 	font-family: var(--font-family-monospace);
 }
 pre:not([class*="language-"]) {
-	margin: .5em 0;
+	margin: 0.5em 0;
 	line-height: 1.375; /* 22px /16 */
 	-moz-tab-size: var(--syntax-tab-size);
 	-o-tab-size: var(--syntax-tab-size);
@@ -194,7 +194,7 @@ header {
 /* Nav */
 .nav {
 	display: flex;
-	gap: .5em 1em;
+	gap: 0.5em 1em;
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -243,8 +243,8 @@ header {
 	font-size: 1.1875em; /* 19px /16 */
 	font-weight: 700;
 	flex-basis: calc(100% - 1.5rem);
-	padding-left: .25em;
-	padding-right: .5em;
+	padding-left: 0.25em;
+	padding-right: 0.5em;
 	text-underline-position: from-font;
 	text-underline-offset: 0;
 	text-decoration-thickness: 1px;
@@ -269,7 +269,7 @@ header {
 .post-metadata {
 	display: inline-flex;
 	flex-wrap: wrap;
-	gap: .5em;
+	gap: 0.5em;
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -277,4 +277,136 @@ header {
 .post-metadata time {
 	margin-right: 1em;
 }
+.post-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 28px;
 
+	/* margin: 0.25em 0; */
+}
+.writing {
+	max-width: 555px;
+	margin: 0 auto;
+}
+.post-text {
+	grid-column-start: 2;
+	grid-column-end: 4;
+}
+.offcanvas {
+	position: fixed;
+	top: 0;
+	right: -260px; /* початкове значення — меню сховане за правим краєм */
+	width: 240px;
+	height: 100%;
+	background: var(--background-color, #fff);
+	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+	padding: 1em;
+	transition: right 0.3s ease;
+	z-index: 1000;
+}
+
+.offcanvas.open {
+	right: 0;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 900;
+}
+
+#overlay.visible {
+	opacity: 1;
+	pointer-events: all;
+}
+
+/* Одна кнопка для відкриття/закриття */
+#menu-toggle {
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	z-index: 1100;
+	background: none;
+	border: none;
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+/* Іконка ☰ (меню) по замовчуванню */
+#menu-toggle::before {
+	content: "☰";
+}
+
+/* Іконка ✕ коли меню відкрите */
+#menu-toggle.open::before {
+	content: "✕";
+}
+
+/* Offcanvas меню — з правого краю */
+.offcanvas {
+	position: fixed;
+	top: 0;
+	right: -260px;
+	width: 240px;
+	height: 100%;
+	background: var(--background-color, #fff);
+	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+	padding: 1em;
+	transition: right 0.3s ease;
+	z-index: 1000;
+}
+
+.offcanvas.open {
+	right: 0;
+}
+
+/* Задній фон */
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 900;
+}
+
+#overlay.visible {
+	opacity: 1;
+	pointer-events: all;
+}
+
+@media screen and (max-width: 1200px) {
+	.post-container {
+		grid-template-columns: 1fr 1fr;
+	}
+	.post-text {
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+}
+
+@media (max-width: 768px) {
+	.offcanvas {
+		width: 100%;
+	}
+	.offcanvas {
+		transform: translateX(100%);
+		transition: transform 0.3s ease;
+		box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+	}
+
+	.offcanvas.open {
+		transform: translateX(0%);
+	}
+}
