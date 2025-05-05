@@ -1,8 +1,9 @@
 <div class = "postlist">
 {%- for post in postslist | reverse %}
 	<div class="list-item">
-		<img class = "list-image" src="{{ post.data.image | url }}" alt="{{ post.data.title }}">
-		<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+		<a href="{{ post.url }}"><img class = "list-image" src="{{ post.data.image | url }}" alt="{{ post.data.title }}"></a>
+		<a href="{{ post.url }}" class="postlist-title">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+		<a href="{{ post.url }}" class="postlist-meta">{% if post.data.meta %}{{ post.data.meta }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
 	</div>
 {%- endfor %}
 </div>

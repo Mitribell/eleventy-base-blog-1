@@ -19,7 +19,7 @@
 	--background-color: var(--color-sand);
 	--text-color: var(--color-dark);
 
-	--text-color-link: var(--color-coral);
+	--text-color-link: var(--color-dark);
 	--text-color-link-active: var(--color-olive);
 	--text-color-link-visited: var(--color-dark);
 
@@ -101,13 +101,6 @@ li {
 a[href] {
 	color: var(--text-color-link);
 	text-decoration: none;
-}
-a[href]:visited {
-	color: var(--text-color-link-visited);
-}
-a[href]:hover,
-a[href]:active {
-	color: var(--text-color-link-active);
 }
 
 main,
@@ -255,26 +248,16 @@ header {
 	align-items: baseline;
 	margin-bottom: 1em;
 }
-.postlist-date,
-.postlist-item:before {
-	font-size: 0.8125em; /* 13px /16 */
-	color: var(--color-gray-90);
-}
-.postlist-date {
-	word-spacing: -0.5px;
-}
-.postlist-link {
-	font-size: 1.1875em; /* 19px /16 */
-	font-weight: 700;
-	padding: 0px;
-	text-underline-position: from-font;
-	text-underline-offset: 0;
-	text-decoration-thickness: 1px;
-}
-.postlist-item-active .postlist-link {
-	font-weight: bold;
-}
+.postlist-title {
+	font-size: 1em; /* 24px /16 */
+	text-transform: lowercase;
 
+}
+.postlist-meta {
+	font-size: 1em;
+	line-height: 1.5;
+	opacity: 0.5;
+}
 /* Tags */
 .post-tag {
 	display: inline-flex;
