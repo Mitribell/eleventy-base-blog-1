@@ -3,11 +3,26 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import markdownIt from "markdown-it";
+
 
 import pluginFilters from "./_config/filters.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
-export default async function(eleventyConfig) {
+export default async function (eleventyConfig) {
+	// Add a custom filter to format quotes
+	const options = {
+		html: true, // дозволяє HTML у Markdown
+		breaks: true, // переносить рядки як <br>
+		linkify: true, // перетворює URL у посилання
+		typographer: true, // ← Увімкнено "розумні лапки", тире тощо
+		quotes: "«»“”", // ← перші дві — основні лапки, другі — fallback
+	};
+
+	const md = markdownIt(options);
+
+	eleventyConfig.setLibrary("md", md);
+
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
 		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
