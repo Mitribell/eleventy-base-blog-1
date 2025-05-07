@@ -3,16 +3,31 @@ let controlPoints = [];
 let squareVertices = [];
 let squareSize = 50;
 let cnv;
+let container;
 
 function setup() {
-  
-  cnv = createCanvas(555, 555);
+  container = document.getElementById('p5-container');
+  let containerWidth = container.offsetWidth;
+  let containerHeight = container.offsetHeight;  
+  cnv = createCanvas(containerWidth, containerHeight);
   cnv.parent('p5-container');
   // frameRate(5)5
 }
+function windowResized() {
+  let containerWidth = container.offsetWidth;
+  let containerHeight = container.offsetHeight;
+  resizeCanvas(containerWidth, containerHeight);
+}
+
 
 function draw() {
   // background(colors[3]);
+  textAlign(CENTER, CENTER);
+  textSize(48);
+  textFont("monospace");
+  fill(colors[2]);
+  noStroke();
+  text("MITRIBELL", width / 2, height / 3);
   stroke(colors[0]);
   fill(colors[1]);
   let squareCenter = createVector(width / 2, height / 2);

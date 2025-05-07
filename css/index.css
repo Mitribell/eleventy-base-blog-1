@@ -10,28 +10,28 @@
 
 /* Theme colors */
 :root {
-	--color-coral: #d95e47; /* основний корал */
+	--color-coral: #d95e47; /* пильний корал */
 	--color-olive: #5a5d4f; /* темна оливка */
 	--color-neon: #b9f73a; /* неоново-салатовий */
-	--color-sand: rgb(244, 249, 236); /* молочний фон */
+	--color-milk: #F2F1EC; /* молочний */
 	--color-dark: #2a2a2a; /* текст на світлому */
 
-	--background-color: var(--color-sand);
+	--background-color: var(--color-milk);
 	--text-color: var(--color-dark);
 
 	--text-color-link: var(--color-dark);
-	--text-color-link-active: var(--color-olive);
-	--text-color-link-visited: var(--color-dark);
+	--text-color-link-active: var(--color-coral);
+	--text-color-link-visited: var(--color-olive);
 
 	--syntax-tab-size: 2;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
 	:root {
-		--background-color: var(--color-sand);
-		--text-color: var(--color-dark);
+		--background-color: var(--color-dark);
+		--text-color: var(--color-milk);
 
-		--text-color-link: var(--color-dark); /* посилання в активному світлому */
+		--text-color-link: var(--color-milk); /* посилання в активному світлому */
 		--text-color-link-active: var(--color-coral); /* наведене */
 		--text-color-link-visited: var(--color-olive); /* відвідане */
 	}
@@ -42,9 +42,8 @@
 	box-sizing: border-box;
 }
 
-html,
 body {
-	padding: 0;
+	padding: 2em;
 	margin: 0 auto;
 	font-family: var(--font-family);
 	color: var(--text-color);
@@ -52,6 +51,9 @@ body {
 }
 html {
 	overflow-y: scroll;
+}
+header {
+	margin-bottom: 20px;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -86,7 +88,10 @@ iframe {
 iframe {
 	aspect-ratio: 16/9;
 }
-
+.p5-container {
+	min-height: 500px;
+	margin: 0 auto;
+}
 p:last-child {
 	margin-bottom: 0;
 }
@@ -105,7 +110,7 @@ a[href] {
 
 main,
 footer {
-	padding: 1rem;
+	padding: 0;
 }
 main :first-child {
 	margin-top: 0;
@@ -115,7 +120,7 @@ main :first-child {
 	display: flex;
 	position: relative;
 	justify-content: center;
-	height: 70vh;
+	height: 80vh;
 	align-items: center;
 }
 
@@ -128,9 +133,7 @@ main :first-child {
 .hero {
 	position: relative;
 	display: flex;
-	flex-direction: column;
-	gap: 1em;
-	padding: 2em 0;
+	flex-direction: column;		
 	text-align: center;
 	z-index: 1;
 }
@@ -143,6 +146,7 @@ main :first-child {
 	font-size: 1.125em; /* 18px /16 */
 	line-height: 1.5;
 	margin: 0;
+	opacity: 0.5;
 }
 
 .links-nextprev {
@@ -198,9 +202,10 @@ header {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1em;
+	padding: 0;
 }
 .home-link {
+	position: absolute;
 	flex-grow: 1;
 	font-size: 1em; /* 16px /16 */
 	font-weight: 700;
@@ -212,8 +217,7 @@ header {
 /* Nav */
 .nav {
 	display: flex;
-	flex-direction: column;
-	gap: 0.5em 0.5em;
+	flex-direction: column;	
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -222,13 +226,10 @@ header {
 	display: inline-block;
 	font-size: 2em; /* 16px /16 */
 	text-transform: lowercase;
-	line-height: 0.9;
+	line-height: 1.2;
 }
 .nav-item a[href] {
 	text-decoration: none;
-}
-.nav a[href][aria-current="page"] {
-	text-decoration: underline;
 }
 
 /* Posts list */
@@ -270,28 +271,31 @@ header {
 	align-self: center;
 }
 
-/* Tags list */
-.post-metadata {
-	display: inline-flex;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-.post-metadata time {
-	margin-right: 1em;
-}
+/* Post Formatting */
 .post-container {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 28px;
-
-	/* margin: 0.25em 0; */
+}
+.post-metadata {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;	
+	margin: 0;
+	opacity: 0.5;
+	text-transform: lowercase;
+}
+.post-meta {
+	font-size: 0.8em; /* 16px /16 */
+	line-height: 0.9;
+}
+.post-text {
+	grid-column-start: 2;
+	grid-column-end: 4;
 }
 .list-image {
 	width: 100%;
-	max-width: 400px;
+	max-width: 300px;
 	height: auto;
 	margin-bottom: 1rem;
 	border-radius: 8px;
@@ -302,21 +306,26 @@ header {
 	max-width: 555px;
 	margin: 0 auto;
 }
-.post-text {
-	grid-column-start: 2;
-	grid-column-end: 4;
+.writing h1 {
+	font-size: 2em; /* 32px /16 */
+	font-weight: 300;
+	line-height: 0.9;
+	margin: 0 0 5rem 0;
+	text-transform: uppercase;
 }
+
 /* Одна кнопка для відкриття/закриття */
 #menu-toggle {
 	position: fixed;
-	top: 0.8rem;
-	right: 0.8rem;
+	top: 1rem;
+	right: 2rem;
 	padding: 0;
 	z-index: 1100;
 	background: none;
 	border: none;
 	font-size: 1.5rem;
 	cursor: pointer;
+	color: var(--text-color);
 }
 /* Іконка ☰ (меню) по замовчуванню */
 #menu-toggle::before {
@@ -333,15 +342,15 @@ header {
 	position: fixed;
 	top: 50px;
 	right: -100%;
-	width: 100%;
-	/* height: 30%; */
-	background: var(--background-color);
-	/* box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); */
-	padding: 1em;
+	width: 100%;	
+	background: var(--background-color);	
+	padding: 2em;
 	/* transition: right 0.3s ease; */
 	z-index: 1000;
-	border-bottom: var(--color-dark) 1px solid;
-	border-top: var(--color-dark) 1px solid;
+	border-bottom: var(--text-color) 1px solid;
+	border-top: var(--text-color) 1px solid;
+	backdrop-filter: blur(10px);
+	opacity: 0.9;
 }
 
 .offcanvas.open {
@@ -355,6 +364,13 @@ header {
 	.post-text {
 		grid-column-start: 1;
 		grid-column-end: 3;
+	}
+	.hero h1 {
+		font-size: 4em; /* 40px /16 */
+	}
+
+	.hero p {
+		font-size: 1.125em; /* 18px /16 */
 	}
 }
 

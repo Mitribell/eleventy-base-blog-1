@@ -12,7 +12,7 @@ function setup() {
 	cnv = createCanvas(parentWidth, parentHeight);
 	cnv.parent("hero-wrapper");
 
-	// frameRate(5)5
+	frameRate(20)
 }
 function windowResized() {
 	if (container) {
@@ -22,10 +22,10 @@ function windowResized() {
 
 function draw() {
 	// background(colors[3]);
-  // stroke(colors[0]);
-  noStroke();
-  fill(colors[1]);
-  clear();
+	// stroke(colors[0]);
+	noStroke();
+	fill(colors[1]);
+	clear();
 	let squareCenter = createVector(width / 2, height / 2);
 
 	squareVertices = [
@@ -47,10 +47,7 @@ function draw() {
 		),
 	];
 	// let distance = createVector( random(50), random(300));
-	let distance = createVector(
-		random(squareSize),
-    random(squareSize)
-	);
+	let distance = createVector(random(squareSize * 2), random(squareSize * 2));
 	controlPoints[0] = createVector(
 		squareVertices[2].x - distance.x,
 		squareVertices[2].y + distance.y
