@@ -5,23 +5,22 @@ let squareSize = 50;
 let cnv;
 let container;
 
-function setup() {
-  container = document.getElementById('p5-container');
+function setup() {  
+  container = document.getElementById('p5-container');  
   let containerWidth = container.offsetWidth;
-  let containerHeight = container.offsetHeight;  
+  let containerHeight = container.offsetWidth * 0.8;  
   cnv = createCanvas(containerWidth, containerHeight);
-  cnv.parent('p5-container');
+  cnv.parent('p5-container');  
   // frameRate(5)5
+  background(colors[3]);
 }
 function windowResized() {
   let containerWidth = container.offsetWidth;
-  let containerHeight = container.offsetHeight;
+  let containerHeight = container.offsetWidth * 0.8;
   resizeCanvas(containerWidth, containerHeight);
+  background(colors[3]);
 }
-
-
-function draw() {
-  // background(colors[3]);
+function draw() {  
   textAlign(CENTER, CENTER);
   textSize(48);
   textFont("monospace");
@@ -80,17 +79,5 @@ function draw() {
     squareVertices[3].y, squareVertices[3].x,
     squareVertices[3].y
   );
-  endShape(CLOSE);
-  // line(
-  //   controlPoints[0].x,
-  //   controlPoints[0].y,
-  //   controlPoints[1].x,
-  //   controlPoints[1].y
-  // );
-  // noStroke();
-  // fill(255, 0, 0);
-  // for (let i = 0; i < controlPoints.length; i++) {
-  //   ellipse(controlPoints[i].x, controlPoints[i].y, 10, 10);
-  // }
-  
+  endShape(CLOSE);  
 }

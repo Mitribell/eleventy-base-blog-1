@@ -1,9 +1,9 @@
-<div class = "postlist">
+<section class = "grid" id = "postsList">
 {%- for post in postslist | reverse %}
-	<div class="list-item">
-		<a href="{{ post.url }}"><img class = "list-image" src="{{ post.data.image | url }}" alt="{{ post.data.title }}"></a>
-		<a href="{{ post.url }}" class="postlist-title">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-		<a href="{{ post.url }}" class="postlist-meta">{% if post.data.meta %}{{ post.data.meta }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+	<div class = "postlist-item">
+		<a href="{{ post.url }}"><img src="{{ post.data.image | url }}" alt="{{ post.data.title }}"></a>
+		<p><a href="{{ post.url }}">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a></p>
+		<p><a href="{{ post.url }}" class="opacity50">{% if post.data.meta %}{{ post.data.meta }}{% else %}<code>{{ post.url }}</code>{% endif %}</a></p>
 	</div>
 {%- endfor %}
 </div>

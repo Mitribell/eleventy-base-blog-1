@@ -2,34 +2,31 @@
 layout: layouts/base.njk
 ---
 
-{# Only include the syntax highlighter CSS on blog posts, included with the CSS per-page bundle #}
-<style>{% include "node_modules/prismjs/themes/prism-okaidia.css" %}</style>
-<style>{% include "css/prism-diff.css" %}</style>
-<div class="post-container">
-    <div class="post-metadata">
-        <div class="post-tags">
+<section id="case-title" class="grid">
+    <div class="two-column">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="two-column case-meta">
+        <p>{{ meta }}</p>
+        <p>
+            <time datetime="{{ page.date | htmlDateString }}">{{ page.date | yearDate }}</time>
+            <br/>
             {%- for tag in tags | filterTagList %}
                 {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
                 <a href="{{ tagUrl }}">{{ tag }}</a>
                 {%- if not loop.last %},
                 {% endif %}
             {%- endfor %}
-        </div>
-        <div class="post-meta">
-            <p>{{ meta }}</p>
-        </div>
+        </p>
     </div>
-    <div class="post-text">
-        <div class="writing">
-            <h1>{{ title }}</h1>
-            {{ content | safe }}
-            <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
-        </div>
-    </div>
-</div>
+</section>
+<section id="main-content" class="grid">
+    {{ content | safe }}
+    
+</section>
+<footer class="post-footer"></footer>
 {%- if collections.posts %}
-    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
-    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}{%- set nextPost = collections.posts | getNextCollectionItem %}
     {%- if nextPost or previousPost %}
         <ul class="links-nextprev">
             {%- if previousPost %}
